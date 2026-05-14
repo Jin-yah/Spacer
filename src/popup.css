@@ -1,0 +1,215 @@
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Base ── */
+body {
+  width: 300px;
+  background: #12121e;
+  color: #ddddf4;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.popup { padding: 16px; }
+
+/* ── Header ── */
+header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #252540;
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(
+    135deg,
+    hsla(0,   55%, 65%, 0.75),
+    hsla(120, 55%, 65%, 0.75),
+    hsla(240, 55%, 65%, 0.75)
+  );
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+h1 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.03em;
+}
+
+/* ── Section ── */
+.setting-group {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #252540;
+}
+.setting-group:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.setting-label {
+  display: block;
+  font-weight: 500;
+  color: #c4c4e0;
+  margin-bottom: 8px;
+}
+
+.hint {
+  color: #5e5e80;
+  font-size: 11px;
+  line-height: 1.45;
+  margin-top: 3px;
+}
+
+/* ── Keybind ── */
+.keybind-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.key-badge {
+  background: #1c1c2e;
+  border: 1px solid #38385a;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-family: ui-monospace, "Cascadia Code", "Fira Code", monospace;
+  font-size: 13px;
+  color: #96c8ff;
+  min-width: 64px;
+  text-align: center;
+  transition: border-color 0.2s, color 0.2s;
+  user-select: none;
+}
+
+.key-badge.capturing {
+  border-color: #5555cc;
+  color: #888;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+.capturing-hint { margin-top: 8px; }
+.capturing-hint kbd {
+  background: #1c1c2e;
+  border: 1px solid #38385a;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 11px;
+  font-family: inherit;
+  color: #96c8ff;
+}
+
+.btn-secondary {
+  background: #1c1c2e;
+  border: 1px solid #38385a;
+  border-radius: 6px;
+  color: #c4c4e0;
+  font-size: 12px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.btn-secondary:hover:not(:disabled) {
+  background: #252540;
+  border-color: #5050a0;
+}
+.btn-secondary:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* ── Toggle row ── */
+.toggle-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Toggle switch */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 22px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  cursor: pointer;
+}
+.toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background: #1c1c2e;
+  border: 1px solid #38385a;
+  border-radius: 22px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.slider::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 2px;
+  top: 2px;
+  background: #5a5a7a;
+  border-radius: 50%;
+  transition: transform 0.2s, background 0.2s;
+}
+.toggle input:checked + .slider            { background: #2a2a88; border-color: #4a4acc; }
+.toggle input:checked + .slider::before   { transform: translateX(16px); background: #9090ff; }
+
+/* ── Max spaces row ── */
+.max-spaces-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: #191928;
+  border: 1px solid #252540;
+  border-radius: 8px;
+  transition: opacity 0.2s;
+}
+.max-spaces-row.disabled {
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+.number-input {
+  width: 54px;
+  background: #12121e;
+  border: 1px solid #38385a;
+  border-radius: 6px;
+  color: #96c8ff;
+  font-size: 13px;
+  padding: 3px 8px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.number-input:focus { border-color: #5050a0; }
+
+/* Remove number input spinner arrows */
+.number-input::-webkit-inner-spin-button,
+.number-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.number-input { -moz-appearance: textfield; }
